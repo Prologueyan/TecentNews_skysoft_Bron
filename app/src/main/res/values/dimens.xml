@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="radio_yaowen">0dp</dimen>
+    <dimen name="radio_aoyun">50dp</dimen>
+    <dimen name="radio_shipin">100dp</dimen>
+    <dimen name="radio_sichuan">150dp</dimen>
+    <dimen name="radio_tiyu">250dp</dimen>
+    <dimen name="radio_nba">300dp</dimen>
+    <dimen name="radio_caijing">350dp</dimen>
+    <dimen name="radio_qiche">400dp</dimen>
+    <dimen name="radio_yule">200dp</dimen>
+</resources>

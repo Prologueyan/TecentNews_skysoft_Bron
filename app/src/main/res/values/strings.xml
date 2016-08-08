@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TecentNews</string>
+    <string name="news">新闻</string>
+    <string name="me">我</string>
+    <string name="live">直播</string>
+    <string name="recommend">推荐</string>
+    <string name="yaowen">要闻</string>
+    <string name="aoyun">奥运</string>
+    <string name="shipin">视频</string>
+    <string name="sichuan">四川</string>
+    <string name="yule">娱乐</string>
+    <string name="tiyu">体育</string>
+    <string name="nba">NBA</string>
+    <string name="caijing">财经</string>
+    <string name="qiche">汽车</string>
+</resources>

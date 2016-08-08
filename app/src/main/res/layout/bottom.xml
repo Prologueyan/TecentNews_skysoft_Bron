@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/bottom_news"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bottom_news_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/news" />
+
+        <TextView
+            android:textColor="#535353"
+            android:id="@+id/bottom_news_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/news" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_recommend"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bottom_recommend_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/rec" />
+
+        <TextView
+            android:textColor="#535353"
+            android:id="@+id/bottom_recommend_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recommend" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_live"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bottom_live_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/live" />
+
+        <TextView
+            android:textColor="#535353"
+            android:id="@+id/bottom_live_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/live" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_me"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bottom_me_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/me" />
+
+        <TextView
+            android:textColor="#535353"
+            android:id="@+id/bottom_me_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/me" />
+
+    </LinearLayout>
+
+</LinearLayout>

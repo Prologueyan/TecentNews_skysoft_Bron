@@ -64,6 +64,5 @@ public class YaowenFragment extends Fragment {
 //        recyclerView.addItemDecoration(new ItemDivider(getActivity(), ItemDivider.VERTICAL_LIST));
         recyclerView.setAdapter(recycAdapter);
 
-
     }
 }

@@ -1,11 +1,13 @@
 package fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import adapter.Item_RecommendNews;
 import adapter.RecomAdapter;
+import bron.yan.tecentnews.NewsDetailActivity;
 import bron.yan.tecentnews.R;
 import util.RecommendNews;
 
@@ -39,6 +42,13 @@ public class RecFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listview_tuijian);
         recomAdapter = new RecomAdapter(getActivity(), lists);
         listView.setAdapter(recomAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

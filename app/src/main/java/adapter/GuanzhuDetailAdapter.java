@@ -1,6 +1,10 @@
 package adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import bron.yan.tecentnews.R;
+import util.DataBaseHelper;
 
 /**
  * Created by test on 2016/8/8.
@@ -20,6 +25,8 @@ public class GuanzhuDetailAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Item_Guanzhu_Detail> datas;
+    private DataBaseHelper dataBaseHelper;
+    private SQLiteDatabase database;
 
     public GuanzhuDetailAdapter(Context mContext, List<Item_Guanzhu_Detail> datas) {
         this.mContext = mContext;
@@ -43,9 +50,9 @@ public class GuanzhuDetailAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.add_guanzhu_detail_item, null);
@@ -61,20 +68,40 @@ public class GuanzhuDetailAdapter extends BaseAdapter {
         viewHolder.imageView.setImageResource(datas.get(position).getPicId());
         viewHolder.name.setText(datas.get(position).getName());
         viewHolder.follower.setText(datas.get(position).getFollower());
-        if (datas.get(position).isGuanzhu()) {
+
+        Log.i("guanzhu_tag", datas.get(position).getGuanzhu_tag() + "");
+        if (datas.get(position).getGuanzhu_tag() == 1) {
             viewHolder.follow.setText("已关注");
+            viewHolder.follow.setTextColor(Color.parseColor("#535353"));
             viewHolder.follow.setBackground(null);
-        }else{
+            viewHolder.follow.setClickable(false);
+        } else {
             viewHolder.follow.setText("关注");
+            viewHolder.follow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dataBaseHelper = new DataBaseHelper(mContext, "guanzhu_db", null, 1);
+                    database = dataBaseHelper.getWritableDatabase();
+
+                    ContentValues values = new ContentValues();
+                    values.put("name", datas.get(position).getName());
+                    values.put("picId", datas.get(position).getPicId());
+                    values.put("follow", 1);
+                    database.insert("guanzhu", null, values);
+
+                    viewHolder.follow.setText("已关注");
+                    viewHolder.follow.setTextColor(Color.parseColor("#535353"));
+                    viewHolder.follow.setBackground(null);
+                    viewHolder.follow.setClickable(false);
+
+                    datas.get(position).setGuanzhu_tag(1);
+
+                }
+            });
+
         }
 
-
-        viewHolder.follow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         return convertView;
     }

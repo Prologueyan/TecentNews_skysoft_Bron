@@ -7,16 +7,16 @@ public class Item_Guanzhu_Detail {
     private String name;
     private String follower;
     private int picId;
-    private boolean guanzhu;
+    private int guanzhu_tag; //默认值0 是未关注  值1 为关注
 
     public Item_Guanzhu_Detail() {
     }
 
-    public Item_Guanzhu_Detail(String name, String follower, int picId, boolean guanzhu) {
+    public Item_Guanzhu_Detail(String name, String follower, int picId, int guanzhu) {
         this.name = name;
         this.follower = follower;
         this.picId = picId;
-        this.guanzhu = guanzhu;
+        this.guanzhu_tag = guanzhu;
     }
 
     public String getName() {
@@ -43,11 +43,11 @@ public class Item_Guanzhu_Detail {
         this.picId = picId;
     }
 
-    public boolean isGuanzhu() {
-        return guanzhu;
+    public int getGuanzhu_tag() {
+        return guanzhu_tag;
     }
 
-    public void setGuanzhu(boolean guanzhu) {
-        this.guanzhu = guanzhu;
+    public void setGuanzhu_tag(int guanzhu_tag) {
+        this.guanzhu_tag = guanzhu_tag;
     }
 }

@@ -13,7 +13,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +99,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
      * @param view
      */
     private void initView(View view) {
+
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 //        mImageView = (ImageView) view.findViewById(R.id.tab_news_line);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
@@ -123,12 +123,12 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
      * 初始化Viewpager
      */
     private void initViewPager() {
-        int[] viewIds = {R.layout.page_yaowen, R.layout.page_aoyun, R.layout.page_shipin,
-                R.layout.page_sichuan, R.layout.page_yule, R.layout.page_tiyu, R.layout.page_nba,
-                R.layout.page_caijing, R.layout.page_qiche};
-        View[] views = {view_yaowen, view_aoyun, view_shipin, view_sichuan, view_yule,
-                view_tiyu, view_nba, view_caijing, view_qiche};
-        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+//        int[] viewIds = {R.layout.page_yaowen, R.layout.page_aoyun, R.layout.page_shipin,
+//                R.layout.page_sichuan, R.layout.page_yule, R.layout.page_tiyu, R.layout.page_nba,
+//                R.layout.page_caijing, R.layout.page_qiche};
+//        View[] views = {view_yaowen, view_aoyun, view_shipin, view_sichuan, view_yule,
+//                view_tiyu, view_nba, view_caijing, view_qiche};
+//        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
 
         viewPager.setAdapter(fragAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

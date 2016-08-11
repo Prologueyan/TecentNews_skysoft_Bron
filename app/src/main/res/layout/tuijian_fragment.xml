@@ -7,6 +7,7 @@
     <include layout="@layout/tuijian_tab" />
 
     <ListView
+        android:scrollbars="none"
         android:id="@+id/listview_tuijian"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

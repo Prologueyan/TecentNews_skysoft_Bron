@@ -14,34 +14,31 @@
         android:textSize="12sp" />
 
     <ImageView
-        android:id="@+id/sanlian"
+        android:id="@+id/rec_guanzhu_1"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"
-        android:layout_toLeftOf="@+id/kantianxia"
-        android:background="@drawable/sanlian"
+        android:layout_toLeftOf="@+id/rec_guanzhu_2"
         android:scaleType="centerCrop" />
 
     <ImageView
-        android:id="@+id/kantianxia"
+        android:id="@+id/rec_guanzhu_2"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_marginTop="2dp"
-        android:layout_toLeftOf="@+id/tengxun"
-        android:background="@drawable/kantianxia"
+        android:layout_toLeftOf="@+id/rec_guanzhu_3"
         android:scaleType="centerCrop" />
 
     <ImageView
-        android:id="@+id/tengxun"
+        android:id="@+id/rec_guanzhu_3"
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginTop="2dp"
         android:layout_toLeftOf="@+id/getin"
-        android:background="@drawable/tengxun"
         android:scaleType="centerCrop" />
 
     <ImageView

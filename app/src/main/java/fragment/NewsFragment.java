@@ -77,7 +77,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
         Log.i(TAG, "initView");
 
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-//        mImageView = (ImageView) view.findViewById(R.id.tab_news_line);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         radio_yaowen = (RadioButton) view.findViewById(R.id.radio_yaowen);
         radio_aoyun = (RadioButton) view.findViewById(R.id.radio_aoyun);
@@ -153,7 +152,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-//        Log.i(TAG, "CheckedChanged" + checkedId + "");
         if (checkedId == R.id.radio_yaowen) {
             returnRadioStyle();
             changeRadioStyle(radio_yaowen);

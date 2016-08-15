@@ -1,7 +1,8 @@
 package adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bron.yan.tecentnews.R;
+import util.DataBaseHelper;
 
 /**
  * 推荐界面的ListViewAdapter
@@ -22,11 +25,23 @@ public class RecomAdapter extends BaseAdapter {
 
     Context mContext;
     List<Item_RecommendNews> lists;
+    private ImageView iv_icon1, iv_icon2, iv_icon3;
+    private List<View> ivs = new ArrayList<>();
+    private DataBaseHelper dataBaseHelper;
+    private SQLiteDatabase database;
+    private List<Integer> picIds = new ArrayList<>();
 
 
     public RecomAdapter(Context mContext, List<Item_RecommendNews> lists) {
         this.mContext = mContext;
         this.lists = lists;
+        dataBaseHelper = new DataBaseHelper(mContext, "hah", null, 1);
+        database = dataBaseHelper.getReadableDatabase();
+        Cursor cursor = database.query("guanzhu", new String[]{"name", "overview", "picId"}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            picIds.add(cursor.getInt(2));
+        }
+        cursor.close();
     }
 
     @Override
@@ -54,16 +69,25 @@ public class RecomAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int type = getItemViewType(position);
         ViewHolder viewHolder = null;
         if (type == 1) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
+            convertView.findViewById(R.id.rec_guanzhu_1).setBackgroundResource(picIds.get(0));
+            iv_icon1 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_1);
+            iv_icon2 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_2);
+            iv_icon3 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_3);
+            ivs.add(iv_icon1);
+            ivs.add(iv_icon2);
+            ivs.add(iv_icon3);
+            for (int i = 0; i < picIds.size(); i++) {
+                Log.i("recAdapter", picIds.get(i) + "");
+                ivs.get(i).setBackgroundResource(picIds.get(i));
+            }
             Log.i("ViewHolder1", convertView + "");
         } else {
-
             if (convertView == null) {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item2, parent, false);
                 viewHolder = new ViewHolder();

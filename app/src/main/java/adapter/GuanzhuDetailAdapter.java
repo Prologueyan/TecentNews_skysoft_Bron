@@ -70,37 +70,69 @@ public class GuanzhuDetailAdapter extends BaseAdapter {
         viewHolder.follower.setText(datas.get(position).getFollower());
 
         Log.i("guanzhu_tag", datas.get(position).getGuanzhu_tag() + "");
+        //设置button样式
         if (datas.get(position).getGuanzhu_tag() == 1) {
             viewHolder.follow.setText("已关注");
             viewHolder.follow.setTextColor(Color.parseColor("#535353"));
             viewHolder.follow.setBackground(null);
-            viewHolder.follow.setClickable(false);
+//            viewHolder.follow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dataBaseHelper = new DataBaseHelper(mContext, "guanzhu_db", null, 1);
+//                    database = dataBaseHelper.getWritableDatabase();
+//                    database.delete("guanzhu", "name=?", new String[]{viewHolder.name.getText().toString()});
+//
+//                    viewHolder.follow.setText("关注");
+//                    datas.get(position).setGuanzhu_tag(0);
+//                }
+//            });
         } else {
             viewHolder.follow.setText("关注");
-            viewHolder.follow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+//            viewHolder.follow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    dataBaseHelper = new DataBaseHelper(mContext, "guanzhu_db", null, 1);
+//                    database = dataBaseHelper.getWritableDatabase();
+//                    ContentValues values = new ContentValues();
+//                    values.put("name", datas.get(position).getName());
+//                    values.put("picId", datas.get(position).getPicId());
+//                    values.put("follow", 1);
+//                    database.insert("guanzhu", null, values);
+//                    viewHolder.follow.setText("已关注");
+//                    viewHolder.follow.setTextColor(Color.parseColor("#535353"));
+//                    viewHolder.follow.setBackground(null);
+//                    datas.get(position).setGuanzhu_tag(1);
+//
+//                }
+//            });
 
-                    dataBaseHelper = new DataBaseHelper(mContext, "guanzhu_db", null, 1);
-                    database = dataBaseHelper.getWritableDatabase();
+        }
 
+        //设置点击事件监听
+        viewHolder.follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBaseHelper = new DataBaseHelper(mContext, "guanzhu_db", null, 1);
+                database = dataBaseHelper.getWritableDatabase();
+                if (datas.get(position).getGuanzhu_tag() == 1) {
+                    database.delete("guanzhu", "name=?", new String[]{viewHolder.name.getText().toString()});
+                    viewHolder.follow.setText("关注");
+                    viewHolder.follow.setBackgroundResource(R.drawable.button_style);
+                    datas.get(position).setGuanzhu_tag(0);
+                } else {
                     ContentValues values = new ContentValues();
                     values.put("name", datas.get(position).getName());
                     values.put("picId", datas.get(position).getPicId());
                     values.put("follow", 1);
                     database.insert("guanzhu", null, values);
-
                     viewHolder.follow.setText("已关注");
                     viewHolder.follow.setTextColor(Color.parseColor("#535353"));
                     viewHolder.follow.setBackground(null);
-                    viewHolder.follow.setClickable(false);
-
                     datas.get(position).setGuanzhu_tag(1);
-
                 }
-            });
-
-        }
+            }
+        });
 
 
         return convertView;

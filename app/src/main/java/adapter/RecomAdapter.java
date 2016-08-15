@@ -59,13 +59,9 @@ public class RecomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         int type = getItemViewType(position);
         ViewHolder viewHolder = null;
-        ViewHolder viewHolder1 = null;
         if (type == 1) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
             Log.i("ViewHolder1", convertView + "");
-//            viewHolder1=new ViewHolder();
-//            convertView.setTag(viewHolder1);
-//            return view
         } else {
 
             if (convertView == null) {

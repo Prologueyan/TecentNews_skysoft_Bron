@@ -1,12 +1,14 @@
 package fragment;
 
-import android.animation.Animator;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import adapter.Item_Live;
 import adapter.Live_ListView_Adapter;
+import bron.yan.tecentnews.NewsDetailActivity;
 import bron.yan.tecentnews.R;
 import util.RefreshableView;
 
@@ -27,10 +30,6 @@ public class LiveFragment extends Fragment {
     private List<Item_Live> datas = new ArrayList<>();
     private Live_ListView_Adapter adapter;
 
-    @Override
-    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
-        return super.onCreateAnimator(transit, enter, nextAnim);
-    }
 
     @Nullable
     @Override
@@ -48,6 +47,13 @@ public class LiveFragment extends Fragment {
 
         adapter = new Live_ListView_Adapter(getActivity(), datas);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mRefreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
             @Override
@@ -61,5 +67,19 @@ public class LiveFragment extends Fragment {
             }
         }, 0);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("LiveFrag", "onDestroyView");
+        mListView = null;
+        super.onDestroyView();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("LiveFrag", "onDestroy");
+        super.onDestroy();
     }
 }

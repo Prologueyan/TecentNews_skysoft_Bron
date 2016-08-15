@@ -1,9 +1,9 @@
 package fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import bron.yan.tecentnews.MyGuanzhuActivity;
+import bron.yan.tecentnews.MyShoucangActivity;
 import bron.yan.tecentnews.R;
 import bron.yan.tecentnews.SettingActivity;
 
@@ -21,6 +22,7 @@ public class MeFragment extends Fragment {
 
 
     private RelativeLayout rl_MyAttention;
+    private RelativeLayout rl_MyShoucang;
     private ImageView iv_setting;
 
     @Override
@@ -41,6 +43,15 @@ public class MeFragment extends Fragment {
             }
         });
 
+        rl_MyShoucang = (RelativeLayout) view.findViewById(R.id.rl_wodeshoucang);
+        rl_MyShoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MyShoucangActivity.class);
+                startActivity(intent);
+            }
+        });
+
         iv_setting = (ImageView) view.findViewById(R.id.image_setting);
         iv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +61,13 @@ public class MeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        iv_setting = null;
+
+        super.onDestroyView();
     }
 }

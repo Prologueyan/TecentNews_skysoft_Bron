@@ -30,6 +30,7 @@ public class ADAdapter extends PagerAdapter {
                     % pictures.size()));
         }
         container.addView(pictures.get(position % pictures.size()), 0);
+        pictures.get(position % pictures.size()).setScaleType(ImageView.ScaleType.CENTER_CROP);
         return pictures.get(position % pictures.size());
     }
 

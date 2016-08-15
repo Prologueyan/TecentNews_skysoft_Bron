@@ -1,9 +1,8 @@
 package fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +12,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import adapter.FragAdapter;
-import adapter.MyPagerAdapter;
-import bron.yan.tecentnews.MainActivity;
 import bron.yan.tecentnews.R;
 
 /**
@@ -41,33 +35,12 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
     private RadioButton radio_caijing;
     private RadioButton radio_qiche;
 
-    private View view_yaowen;
-    private View view_aoyun;
-    private View view_shipin;
-    private View view_sichuan;
-    private View view_yule;
-    private View view_nba;
-    private View view_tiyu;
-    private View view_caijing;
-    private View view_qiche;
-
-    private android.support.v4.app.Fragment mYaowenFragment;
-    private android.support.v4.app.Fragment mAoyunFragment;
-    private android.support.v4.app.Fragment mShipinFragment;
-    private android.support.v4.app.Fragment mSichuanFragment;
-    private android.support.v4.app.Fragment mTiyuFragment;
-    private android.support.v4.app.Fragment mNbaFragment;
-    private android.support.v4.app.Fragment mYuleFragment;
-    private android.support.v4.app.Fragment mCaijingFragment;
-    private android.support.v4.app.Fragment mQicheFragment;
 
     private FragAdapter fragAdapter;
-    private List<android.support.v4.app.Fragment> fragmentlist;
 
     private RadioButton mCurrentRadioButton;
     private HorizontalScrollView mHorizontalScrollView;
     private ViewPager viewPager;
-    private MyPagerAdapter pagerAdapter;
     private int mCurrentpage;
 
     private int[] radioIds = {R.id.radio_yaowen, R.id.radio_aoyun, R.id.radio_shipin, R.id.radio_sichuan,
@@ -77,6 +50,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
         initFragments();
     }
 
@@ -84,11 +58,11 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.news_fragment, null);
         mHorizontalScrollView = (HorizontalScrollView) view.findViewById(R.id.horizontal_scroll_view);
         initView(view);
         initViewPager();
-        initYaoWen();
         return view;
     }
 
@@ -99,6 +73,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
      * @param view
      */
     private void initView(View view) {
+
+        Log.i(TAG, "initView");
 
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 //        mImageView = (ImageView) view.findViewById(R.id.tab_news_line);
@@ -123,14 +99,12 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
      * 初始化Viewpager
      */
     private void initViewPager() {
-//        int[] viewIds = {R.layout.page_yaowen, R.layout.page_aoyun, R.layout.page_shipin,
-//                R.layout.page_sichuan, R.layout.page_yule, R.layout.page_tiyu, R.layout.page_nba,
-//                R.layout.page_caijing, R.layout.page_qiche};
-//        View[] views = {view_yaowen, view_aoyun, view_shipin, view_sichuan, view_yule,
-//                view_tiyu, view_nba, view_caijing, view_qiche};
-//        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+
+        Log.i(TAG, "initViewPager");
 
         viewPager.setAdapter(fragAdapter);
+        viewPager.setCurrentItem(0);
+        Log.i(TAG, "currentItem :" + viewPager.getCurrentItem());
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
@@ -171,14 +145,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
 
     }
 
-    /**
-     * 初始化 要闻 界面
-     */
-    private void initYaoWen() {
-        mYaowenFragment = new YaowenFragment();
-        view_yaowen = mYaowenFragment.getView();
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -187,7 +153,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        Log.i(TAG, "CheckedChanged" + checkedId + "");
+//        Log.i(TAG, "CheckedChanged" + checkedId + "");
         if (checkedId == R.id.radio_yaowen) {
             returnRadioStyle();
             changeRadioStyle(radio_yaowen);
@@ -265,28 +231,10 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Radi
     }
 
     private void initFragments() {
-        mAoyunFragment = new AoyunFragment();
-        mYaowenFragment = new YaowenFragment();
-        mSichuanFragment = new SichuanFragment();
-        mShipinFragment = new ShipinFragment();
-        mTiyuFragment = new TiyuFragment();
-        mNbaFragment = new NbaFragment();
-        mYuleFragment = new YuleFragment();
-        mCaijingFragment = new CaijingFragment();
-        mQicheFragment = new QicheFragment();
-        fragmentlist = new ArrayList<>();
-        fragmentlist.add(mYaowenFragment);
-        fragmentlist.add(mAoyunFragment);
-        fragmentlist.add(mSichuanFragment);
-        fragmentlist.add(mShipinFragment);
-        fragmentlist.add(mTiyuFragment);
-        fragmentlist.add(mNbaFragment);
-        fragmentlist.add(mYuleFragment);
-        fragmentlist.add(mCaijingFragment);
-        fragmentlist.add(mQicheFragment);
 
-        FragmentManager fragmentManager = MainActivity.getMainActivityFragmentManager();
-        fragAdapter = new FragAdapter(fragmentManager, fragmentlist);
+        Log.i(TAG, "initFragments");
+
+        fragAdapter = new FragAdapter(getChildFragmentManager());
     }
 
 

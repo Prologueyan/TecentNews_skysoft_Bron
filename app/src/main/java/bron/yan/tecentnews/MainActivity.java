@@ -1,9 +1,9 @@
 package bron.yan.tecentnews;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -28,13 +28,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView zhibo;
     private TextView wo;
 
-    //持有四个Fragment
-    private NewsFragment news_fragment;
-    private RecFragment rec_fragment;
-    private LiveFragment live_fragment;
-    private MeFragment me_fragment;
+//    //持有四个Fragment
+//    private NewsFragment news_fragment;
+//    private RecFragment rec_fragment;
+//    private LiveFragment live_fragment;
+//    private MeFragment me_fragment;
 
-    private static android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         setDefaultFragment();
 
-        fragmentManager = getSupportFragmentManager();
     }
 
     private void initView() {
@@ -65,9 +63,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void setDefaultFragment() {
-        FragmentManager fg = getFragmentManager();
+        FragmentManager fg = getSupportFragmentManager();
         FragmentTransaction transaction = fg.beginTransaction();
-        news_fragment = new NewsFragment();
+        NewsFragment news_fragment = new NewsFragment();
         transaction.replace(R.id.main_frame, news_fragment);
         transaction.commit();
 
@@ -77,43 +75,43 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        FragmentManager fg = getFragmentManager();
+        FragmentManager fg = getSupportFragmentManager();
         FragmentTransaction transaction = fg.beginTransaction();
         Log.i(TAG, v.getId() + "");
 
         switch (v.getId()) {
 
             case R.id.bottom_news:
-                if (news_fragment == null) {
-                    news_fragment = new NewsFragment();
-                }
+//                if (news_fragment == null) {
+                NewsFragment news_fragment = new NewsFragment();
+//                }
                 colorReturn();
                 transaction.replace(R.id.main_frame, news_fragment);
                 transaction.commit();
                 xinwen.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_recommend:
-                if (rec_fragment == null) {
-                    rec_fragment = new RecFragment();
-                }
+//                if (rec_fragment == null) {
+                RecFragment rec_fragment = new RecFragment();
+//                }
                 colorReturn();
                 transaction.replace(R.id.main_frame, rec_fragment);
                 transaction.commit();
                 tuijian.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_live:
-                if (live_fragment == null) {
-                    live_fragment = new LiveFragment();
-                }
+//                if (live_fragment == null) {
+                LiveFragment live_fragment = new LiveFragment();
+//                }
                 colorReturn();
                 transaction.replace(R.id.main_frame, live_fragment);
                 transaction.commit();
                 zhibo.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_me:
-                if (me_fragment == null) {
-                    me_fragment = new MeFragment();
-                }
+//                if (me_fragment == null) {
+                MeFragment me_fragment = new MeFragment();
+//                }
                 colorReturn();
                 transaction.replace(R.id.main_frame, me_fragment);
                 transaction.commit();
@@ -130,7 +128,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         wo.setTextColor(getResources().getColor(R.color.defaultColor));
     }
 
-    public static android.support.v4.app.FragmentManager getMainActivityFragmentManager() {
-        return fragmentManager;
-    }
+
 }

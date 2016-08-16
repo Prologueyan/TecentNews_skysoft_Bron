@@ -75,7 +75,7 @@ public class RecomAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (type == 1) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
-            convertView.findViewById(R.id.rec_guanzhu_1).setBackgroundResource(picIds.get(0));
+//            convertView.findViewById(R.id.rec_guanzhu_1).setBackgroundResource(picIds.get(0));
             iv_icon1 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_1);
             iv_icon2 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_2);
             iv_icon3 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_3);

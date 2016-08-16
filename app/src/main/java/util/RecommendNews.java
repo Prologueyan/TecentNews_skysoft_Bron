@@ -23,7 +23,7 @@ public class RecommendNews {
 
     private static int[] commentCount = {0,331, 633, 10, 563, 66, 29};
 
-    private static String[] tags = {"","国际时事", "Vista看天下", "腾讯体育", "腾讯科技", "爱卡汽车", "腾讯数码"};
+    private static String[] tags = {"","Vista看天下", "Vista看天下", "今日话题", "今日话题", "VOGUE", "VOGUE"};
 
 
     public static List<Item_RecommendNews> getRecommendNews() {

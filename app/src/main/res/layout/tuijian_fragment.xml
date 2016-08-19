@@ -6,13 +6,19 @@
 
     <include layout="@layout/tuijian_tab" />
 
-    <ListView
-        android:scrollbars="none"
-        android:id="@+id/listview_tuijian"
+    <util.RefreshableView
+        android:id="@+id/rec_refreshable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <ListView
+            android:id="@+id/listview_tuijian"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:scrollbars="none">
+
+        </ListView>
+    </util.RefreshableView>
 
 </LinearLayout>

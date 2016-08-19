@@ -1,6 +1,7 @@
 package bron.yan.tecentnews;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +28,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView tuijian;
     private TextView zhibo;
     private TextView wo;
+
+    private Fragment from;
+
 
 //    //持有四个Fragment
 //    private NewsFragment news_fragment;
@@ -69,6 +73,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         transaction.replace(R.id.main_frame, news_fragment);
         transaction.commit();
 
+        from = news_fragment;
+
         xinwen.setTextColor(getResources().getColor(R.color.colorPrimary));
 
     }
@@ -82,39 +88,39 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.bottom_news:
-//                if (news_fragment == null) {
                 NewsFragment news_fragment = new NewsFragment();
-//                }
                 colorReturn();
-                transaction.replace(R.id.main_frame, news_fragment);
-                transaction.commit();
+//                transaction.replace(R.id.main_frame, news_fragment);
+//                transaction.commit();
+                switchFragment(from, news_fragment);
+                from = news_fragment;
                 xinwen.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_recommend:
-//                if (rec_fragment == null) {
                 RecFragment rec_fragment = new RecFragment();
-//                }
                 colorReturn();
-                transaction.replace(R.id.main_frame, rec_fragment);
-                transaction.commit();
+//                transaction.replace(R.id.main_frame, rec_fragment);
+//                transaction.commit();
+                switchFragment(from, rec_fragment);
+                from = rec_fragment;
                 tuijian.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_live:
-//                if (live_fragment == null) {
                 LiveFragment live_fragment = new LiveFragment();
-//                }
                 colorReturn();
-                transaction.replace(R.id.main_frame, live_fragment);
-                transaction.commit();
+//                transaction.replace(R.id.main_frame, live_fragment);
+//                transaction.commit();
+                switchFragment(from, live_fragment);
+                from = live_fragment;
                 zhibo.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case R.id.bottom_me:
-//                if (me_fragment == null) {
                 MeFragment me_fragment = new MeFragment();
-//                }
                 colorReturn();
-                transaction.replace(R.id.main_frame, me_fragment);
-                transaction.commit();
+//                transaction.replace(R.id.main_frame, me_fragment);
+//                transaction.commit();
+                switchFragment(from, me_fragment);
+                from = me_fragment;
                 wo.setTextColor(getResources().getColor(R.color.colorPrimary));
                 break;
 
@@ -129,4 +135,30 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
 
+    /**
+     * 切换页面的重载，优化了fragment的切换
+     *
+     * @param from
+     * @param to
+     */
+    public void switchFragment(Fragment from, Fragment to) {
+        if (from == null || to == null)
+            return;
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (!to.isAdded()) {
+            // 隐藏当前的fragment，add下一个到Activity中
+            transaction.hide(from).add(R.id.main_frame, to).commit();
+        } else {
+            // 隐藏当前的fragment，显示下一个
+            transaction.hide(from).show(to).commit();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        from = null;
+        super.onDestroy();
+    }
 }

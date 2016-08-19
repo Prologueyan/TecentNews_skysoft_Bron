@@ -35,6 +35,7 @@ public class RecomAdapter extends BaseAdapter {
     public RecomAdapter(Context mContext, List<Item_RecommendNews> lists) {
         this.mContext = mContext;
         this.lists = lists;
+        Log.i("adapter", "chuangjian");
         dataBaseHelper = new DataBaseHelper(mContext, "hah", null, 1);
         database = dataBaseHelper.getReadableDatabase();
         Cursor cursor = database.query("guanzhu", new String[]{"name", "overview", "picId"}, null, null, null, null, null);
@@ -71,48 +72,111 @@ public class RecomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.i("adapter", "getView");
         int type = getItemViewType(position);
-        ViewHolder viewHolder = null;
-        if (type == 1) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
-//            convertView.findViewById(R.id.rec_guanzhu_1).setBackgroundResource(picIds.get(0));
-            iv_icon1 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_1);
-            iv_icon2 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_2);
-            iv_icon3 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_3);
-            ivs.add(iv_icon1);
-            ivs.add(iv_icon2);
-            ivs.add(iv_icon3);
-            for (int i = 0; i < picIds.size(); i++) {
-                Log.i("recAdapter", picIds.get(i) + "");
-                ivs.get(i).setBackgroundResource(picIds.get(i));
-            }
-            Log.i("ViewHolder1", convertView + "");
-        } else {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item2, parent, false);
-                viewHolder = new ViewHolder();
-                viewHolder.title = (TextView) convertView.findViewById(R.id.title_tuijian_item);
-                viewHolder.tag = (TextView) convertView.findViewById(R.id.tag_tuijian_item);
-                viewHolder.count = (TextView) convertView.findViewById(R.id.comment_count_tuijian_item);
-                viewHolder.picture = (ImageView) convertView.findViewById(R.id.imageView_tuijian_item);
-                convertView.setTag(viewHolder);
-                Log.i("ViewHolder2", convertView + "");
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-                Log.i("ViewHolder3", convertView + "");
-            }
-            Log.d("Debug", lists.get(position).getTitle());
-            viewHolder.title.setText(lists.get(position).getTitle());
-            viewHolder.tag.setText(lists.get(position).getComeFrom());
-            viewHolder.count.setText(lists.get(position).getCommentCount() + "条评论");
-            viewHolder.picture.setImageResource(lists.get(position).getPictureId());
+        ViewHolder1 viewHolder1 = null;
+        ViewHolder2 viewHolder2 = null;
 
+        if (convertView == null) {
+            switch (type) {
+                case 1:
+                    convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
+                    viewHolder1 = new ViewHolder1();
+                    viewHolder1.imageView1 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_1);
+                    viewHolder1.imageView2 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_2);
+                    viewHolder1.imageView3 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_3);
+
+                    convertView.setTag(viewHolder1);
+                    Log.i("viewHolder1", convertView + "");
+                    break;
+                case 2:
+                    convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item2, parent, false);
+                    viewHolder2 = new ViewHolder2();
+                    viewHolder2.title = (TextView) convertView.findViewById(R.id.title_tuijian_item);
+                    viewHolder2.tag = (TextView) convertView.findViewById(R.id.tag_tuijian_item);
+                    viewHolder2.count = (TextView) convertView.findViewById(R.id.comment_count_tuijian_item);
+                    viewHolder2.picture = (ImageView) convertView.findViewById(R.id.imageView_tuijian_item);
+                    convertView.setTag(viewHolder2);
+                    Log.i("viewHolder2", convertView + "");
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (type) {
+                case 1:
+                    viewHolder1 = (ViewHolder1) convertView.getTag();
+                    break;
+                case 2:
+                    viewHolder2 = (ViewHolder2) convertView.getTag();
+                    break;
+            }
         }
+
+//        if (type == 1) {
+//            Log.i("getView", "type = 1");
+//
+//            convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item1, parent, false);
+////            convertView.findViewById(R.id.rec_guanzhu_1).setBackgroundResource(picIds.get(0));
+//            iv_icon1 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_1);
+//            iv_icon2 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_2);
+//            iv_icon3 = (ImageView) convertView.findViewById(R.id.rec_guanzhu_3);
+//            ivs.add(iv_icon3);
+//            ivs.add(iv_icon2);
+//            ivs.add(iv_icon1);
+//            for (int i = 0; i < picIds.size() && i < 3; i++) {
+//                Log.i("recAdapter", picIds.get(i) + "");
+//                ivs.get(i).setBackgroundResource(picIds.get(i));
+//            }
+//            Log.i("viewHolder21", convertView + "");
+//        } else {
+//            if (convertView == null) {
+//                convertView = LayoutInflater.from(mContext).inflate(R.layout.recommend_news_item2, parent, false);
+//                viewHolder2 = new ViewHolder2();
+//                viewHolder2.title = (TextView) convertView.findViewById(R.id.title_tuijian_item);
+//                viewHolder2.tag = (TextView) convertView.findViewById(R.id.tag_tuijian_item);
+//                viewHolder2.count = (TextView) convertView.findViewById(R.id.comment_count_tuijian_item);
+//                viewHolder2.picture = (ImageView) convertView.findViewById(R.id.imageView_tuijian_item);
+//                convertView.setTag(viewHolder2);
+//                Log.i("viewHolder22", convertView + "");
+//            } else {
+//                viewHolder2 = (ViewHolder2) convertView.getTag();
+//                Log.i("viewHolder23", convertView + "");
+//            }
+
+//        Log.d("Debug", lists.get(position).getTitle());
+        switch (type) {
+            case 1:
+                ivs.add(viewHolder1.imageView3);
+                ivs.add(viewHolder1.imageView2);
+                ivs.add(viewHolder1.imageView1);
+                for (int i = 0; i < picIds.size() && i < 3; i++) {
+                    Log.i("recAdapter", picIds.get(i) + "");
+                    ivs.get(i).setBackgroundResource(picIds.get(i));
+                }
+                break;
+            case 2:
+                viewHolder2.title.setText(lists.get(position).getTitle());
+                viewHolder2.tag.setText(lists.get(position).getComeFrom());
+                viewHolder2.count.setText(lists.get(position).getCommentCount() + "条评论");
+                viewHolder2.picture.setImageResource(lists.get(position).getPictureId());
+
+                break;
+        }
+
         return convertView;
 
     }
 
-    class ViewHolder {
+    class ViewHolder1 {
+
+        ImageView imageView1;
+        ImageView imageView2;
+        ImageView imageView3;
+
+    }
+
+    class ViewHolder2 {
 
         TextView title;
         TextView tag;

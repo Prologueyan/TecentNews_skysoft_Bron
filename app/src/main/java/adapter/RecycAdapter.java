@@ -1,9 +1,11 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import bron.yan.tecentnews.NewsDetailActivity;
 import bron.yan.tecentnews.R;
 
 /**
@@ -115,12 +118,13 @@ public class RecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    class MyViewHolder2 extends RecyclerView.ViewHolder {
+    class MyViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
         TextView tag;
         TextView count;
         ImageView picture;
+
 
         public MyViewHolder2(android.view.View itemView) {
             super(itemView);
@@ -128,6 +132,13 @@ public class RecycAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tag = (TextView) itemView.findViewById(R.id.tag_yaowen_item);
             count = (TextView) itemView.findViewById(R.id.comment_count_yaowen_item);
             picture = (ImageView) itemView.findViewById(R.id.imageView_yaowen_item);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, NewsDetailActivity.class);
+            mContext.startActivity(intent);
         }
     }
 }
